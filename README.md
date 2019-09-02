@@ -55,7 +55,7 @@ We offer the raw XBRL/PDF file to preserve all of the contents.
 
 We offer the raw XBRL/PDF file to preserve all of the contents. But we understand these are terrible to use.
 
-For that reason, we offer the pipeline to extract contents from the raw file. We develop parser in the separated repository [edinet-python](https://github.com/chakki-works/edinet-python). You can use edinet-python](https://github.com/chakki-works/edinet-python) as independent parser for XBRL.
+For that reason, we offer the pipeline to extract contents from the raw file. We develop parser in the separated repository [edinet-python](https://github.com/chakki-works/edinet-python). You can use [edinet-python](https://github.com/chakki-works/edinet-python) as independent parser for XBRL.
 
 ### Supported Elements
 
