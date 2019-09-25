@@ -17,11 +17,13 @@ class Storage():
         if not directory.is_absolute():
             directory = Path.cwd().joinpath(directory)
 
-        year = year if year else datetime.now().year - 1
+        year = str(year if year else datetime.now().year - 1)
+        _kind = ""
 
         if kind == "R":
             url = DOWNLAD_URL.format("", year)
         elif kind == "E":
+            _kind = "_extracted"
             url = DOWNLAD_URL.format("_extracted", year)
         elif len(kind) == 2 and kind[0] == "X":
             _kind = "_extracted" if kind[1] == "E" else ""

@@ -9,5 +9,10 @@ class Chafic(object):
         return download(path, kind, year)
 
 
-if __name__ == '__main__':
+def main():
     fire.Fire(Chafic)
+
+
+if __name__ == '__main__':
+    main()
+
