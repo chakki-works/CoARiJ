@@ -1,12 +1,15 @@
 import fire
-from chafic.download import download
+from chafic.storage import Storage
 
 
 class Chafic(object):
     """Data management tool for chaFic dataset."""
 
-    def download(self, path="", kind="R", year=""):
-        return download(path, kind, year)
+    def __init__(self):
+        self.storage = Storage()
+
+    def download(self, directory="", year="", kind="R", force=False):
+        return self.storage.download(directory, year, kind, force)
 
 
 def main():
@@ -15,4 +18,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
