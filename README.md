@@ -1,35 +1,34 @@
 # chaFiC: chakki Financial Report Corpus
 
-We organized Japanese financial reports to encourage applying NLP techniques to the financial domain.
+We organized Japanese financial reports to encourage applying NLP techniques to financial analytics.
 
 ## Dataset
 
 The corpora are separated to each financial years.
 
-* [2014]()
-* [2015]()
-* [2016]()
-* [2017]()
-* [2018]()
+| fiscal_year | Raw file version | Text extracted version | 
+|-------------|-------------------|-----------------|
+| 2014        | [download](https://s3-ap-northeast-1.amazonaws.com/chakki.esg.financial.jp/dataset/release/chakki_esg_financial_2014.zip)          | [download](https://s3-ap-northeast-1.amazonaws.com/chakki.esg.financial.jp/dataset/release/chakki_esg_financial_extracted_2014.zip)              | 
+| 2015        | [download](https://s3-ap-northeast-1.amazonaws.com/chakki.esg.financial.jp/dataset/release/chakki_esg_financial_2015.zip)          | [download](https://s3-ap-northeast-1.amazonaws.com/chakki.esg.financial.jp/dataset/release/chakki_esg_financial_extracted_2015.zip)        | 
+| 2016        | [download](https://s3-ap-northeast-1.amazonaws.com/chakki.esg.financial.jp/dataset/release/chakki_esg_financial_2016.zip)          | [download](https://s3-ap-northeast-1.amazonaws.com/chakki.esg.financial.jp/dataset/release/chakki_esg_financial_extracted_2016.zip)              | 
+| 2017        | [download](https://s3-ap-northeast-1.amazonaws.com/chakki.esg.financial.jp/dataset/release/chakki_esg_financial_2017.zip)          | [download](https://s3-ap-northeast-1.amazonaws.com/chakki.esg.financial.jp/dataset/release/chakki_esg_financial_extracted_2017.zip)        | 
+| 2018        | [download]()          | [download]()        | 
 
 ## Statistics
 
-| fiscal_year | num_financial | num_csr | 
-|-------------|---------------|---------| 
-| 2014        | 3885          | 86      | 
-| 2015        | 3579          | 84      | 
-| 2016        | 4041          | 99      | 
-| 2017        | 1515          | 28      | 
-| 2018        | 3005          | 48      | 
+| fiscal_year | number_of_reports | has_csr_reports | has_financial_data | has_stock_data | 
+|-------------|-------------------|-----------------|--------------------|----------------| 
+| 2014        | 3724              | 92              | 3583               | 3595           | 
+| 2015        | 3870              | 96              | 3725               | 3751           | 
+| 2016        | 4066              | 97              | 3924               | 3941           | 
+| 2017        | 3578              | 89              | 3441               | 3472           | 
+| 2018        | 3513              | 70              | 2893               | 3413           | 
 
 ### Content
 
-Each dataset includes following files.
+**Raw file version**
 
-* XBRL file of annual reports (files are retrieved from [EDINET]).
-* PDF file of CSR reports (additional content).
-
-The structure of each dataset is following.
+The structure of dataset is following.
 
 ```
 chakki_esg_financial_{year}.zip
@@ -38,9 +37,12 @@ chakki_esg_financial_{year}.zip
      └── docs/
 ```
 
-`documents.csv` has following columns.
+`docs` includes XBRL and PDF file.
 
-Examples:
+* XBRL file of annual reports (files are retrieved from [EDINET]).
+* PDF file of CSR reports (additional content).
+
+`documents.csv` has metadata like following.
 
 * edinet_code: `E0000X`
 * filer_name: `XXX株式会社`
@@ -49,24 +51,20 @@ Examples:
 * doc_path: `docs/S000000X.xbrl`
 * csr_path: `docs/E0000X_201X_JP_36.pdf`
 
-## Data Extraction
+**Text extracted version**
 
-We offer the raw XBRL/PDF file to preserve all of the contents.
+Text extracted version includes `txt` files that match each part of an annual report.
 
-We offer the raw XBRL/PDF file to preserve all of the contents. But we understand these are terrible to use.
+The extracted parts are defined at [`edinet-python`](https://github.com/chakki-works/edinet-python#2-extract-contents-from-xbrl).
+You can use [edinet-python](https://github.com/chakki-works/edinet-python) to extract target part of XBRL file from raw data format.
 
-For that reason, we offer the pipeline to extract contents from the raw file. We develop parser in the separated repository [edinet-python](https://github.com/chakki-works/edinet-python). You can use [edinet-python](https://github.com/chakki-works/edinet-python) as independent parser for XBRL.
+```
+from edinet.parser.xbrl_file import XBRLFile
+from edinet.parser.aspects.business import Business
 
-### Supported Elements
 
-Please refer the [edinet-python](https://github.com/chakki-works/edinet-python) README.md.
-
-Example:
-
-Extract ``s from XBRLs.
-
-```py
-python xxx.py y_Element
+xbrl = XBRLFile("path/to/xbrl/file")
+content = xbrl.parse_by(Business).policy_environment_issue_etc
 ```
 
 ## Utilize Data for NLP
