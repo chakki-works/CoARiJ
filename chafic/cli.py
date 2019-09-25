@@ -8,8 +8,8 @@ class Chafic(object):
     def __init__(self):
         self.storage = Storage()
 
-    def download(self, directory="", year="", kind="R", force=False):
-        return self.storage.download(directory, year, kind, force)
+    def download(self, directory="", kind="F", year="", force=False):
+        return self.storage.download(directory, kind, year, force)
 
 
 def main():

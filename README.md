@@ -8,11 +8,22 @@ The corpora are separated to each financial years.
 
 | fiscal_year | Raw file version | Text extracted version | 
 |-------------|-------------------|-----------------|
-| 2014        | [download](https://s3-ap-northeast-1.amazonaws.com/chakki.esg.financial.jp/dataset/release/chakki_esg_financial_2014.zip)          | [download](https://s3-ap-northeast-1.amazonaws.com/chakki.esg.financial.jp/dataset/release/chakki_esg_financial_extracted_2014.zip)              | 
-| 2015        | [download](https://s3-ap-northeast-1.amazonaws.com/chakki.esg.financial.jp/dataset/release/chakki_esg_financial_2015.zip)          | [download](https://s3-ap-northeast-1.amazonaws.com/chakki.esg.financial.jp/dataset/release/chakki_esg_financial_extracted_2015.zip)        | 
-| 2016        | [download](https://s3-ap-northeast-1.amazonaws.com/chakki.esg.financial.jp/dataset/release/chakki_esg_financial_2016.zip)          | [download](https://s3-ap-northeast-1.amazonaws.com/chakki.esg.financial.jp/dataset/release/chakki_esg_financial_extracted_2016.zip)              | 
-| 2017        | [download](https://s3-ap-northeast-1.amazonaws.com/chakki.esg.financial.jp/dataset/release/chakki_esg_financial_2017.zip)          | [download](https://s3-ap-northeast-1.amazonaws.com/chakki.esg.financial.jp/dataset/release/chakki_esg_financial_extracted_2017.zip)        | 
-| 2018        | [download]()          | [download]()        | 
+| 2014        | [.zip](https://s3-ap-northeast-1.amazonaws.com/chakki.esg.financial.jp/dataset/release/chakki_esg_financial_2014.zip)          | [.zip](https://s3-ap-northeast-1.amazonaws.com/chakki.esg.financial.jp/dataset/release/chakki_esg_financial_extracted_2014.zip)              | 
+| 2015        | [.zip](https://s3-ap-northeast-1.amazonaws.com/chakki.esg.financial.jp/dataset/release/chakki_esg_financial_2015.zip)          | [.zip](https://s3-ap-northeast-1.amazonaws.com/chakki.esg.financial.jp/dataset/release/chakki_esg_financial_extracted_2015.zip)        | 
+| 2016        | [.zip](https://s3-ap-northeast-1.amazonaws.com/chakki.esg.financial.jp/dataset/release/chakki_esg_financial_2016.zip)          | [.zip](https://s3-ap-northeast-1.amazonaws.com/chakki.esg.financial.jp/dataset/release/chakki_esg_financial_extracted_2016.zip)              | 
+| 2017        | [.zip](https://s3-ap-northeast-1.amazonaws.com/chakki.esg.financial.jp/dataset/release/chakki_esg_financial_2017.zip)          | [.zip](https://s3-ap-northeast-1.amazonaws.com/chakki.esg.financial.jp/dataset/release/chakki_esg_financial_extracted_2017.zip)        | 
+| 2018        | [.zip](https://s3-ap-northeast-1.amazonaws.com/chakki.esg.financial.jp/dataset/release/chakki_esg_financial_2018.zip)          | [.zip](https://s3-ap-northeast-1.amazonaws.com/chakki.esg.financial.jp/dataset/release/chakki_esg_financial_extracted_2018.zip)        | 
+
+## Download
+
+You can download data by command line tool.
+
+```
+pip install chafic
+```
+
+```
+```
 
 ## Statistics
 
@@ -23,6 +34,7 @@ The corpora are separated to each financial years.
 | 2016        | 4066              | 97              | 3924               | 3941           | 
 | 2017        | 3578              | 89              | 3441               | 3472           | 
 | 2018        | 3513              | 70              | 2893               | 3413           | 
+
 
 ### Content
 
@@ -53,18 +65,21 @@ chakki_esg_financial_{year}.zip
 
 **Text extracted version**
 
-Text extracted version includes `txt` files that match each part of an annual report.
+Text extracted version includes `txt` files that match each part of an annual report.  
+`txt` files are grouped by each company (`edinet_code`).
 
 The extracted parts are defined at [`edinet-python`](https://github.com/chakki-works/edinet-python#2-extract-contents-from-xbrl).
-You can use [edinet-python](https://github.com/chakki-works/edinet-python) to extract target part of XBRL file from raw data format.
 
 ```
-from edinet.parser.xbrl_file import XBRLFile
-from edinet.parser.aspects.business import Business
+chakki_esg_financial_{year}_extracted.zip
+└──{year}
+     ├── documents.csv
+     └── docs/
+       ├── E00004/
+       ├── E00006/
+       ├── E00008/
+       ...
 
-
-xbrl = XBRLFile("path/to/xbrl/file")
-content = xbrl.parse_by(Business).policy_environment_issue_etc
 ```
 
 ## Utilize Data for NLP
