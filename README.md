@@ -1,5 +1,9 @@
 # chaFiC: chakki Financial Report Corpus
 
+[![PyPI version](https://badge.fury.io/py/chaFiC.svg)](https://badge.fury.io/py/chaFiC)
+[![Build Status](https://travis-ci.org/chakki-works/chaFiC.svg?branch=master)](https://travis-ci.org/chakki-works/chaFiC)
+[![codecov](https://codecov.io/gh/chakki-works/chaFiC/branch/master/graph/badge.svg)](https://codecov.io/gh/chakki-works/chaFiC)
+
 We organized Japanese financial reports to encourage applying NLP techniques to financial analytics.
 
 ## Dataset
