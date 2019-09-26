@@ -23,10 +23,13 @@ chafic parse business.overview_of_result --sec_code 3626
 
 # Tokenize text by Janome (Janome or Sudachi is supported).
 pip install janome
-chafic parse business.overview_of_result --sec_code 3626
+chafic tokenize --tokenizer janome
 
-
-
+# Show tokenized result (words are separated by \t).
+head -n 5 data/processed/2014/docs/S100552V_business_overview_of_result_tokenized.txt
+1       【      業績    等      の      概要    】
+(       1       )               業績
+当      連結    会計    年度    における        我が国  経済    は      、     消費    税率    引上げ  に      伴う    駆け込み        需要    の      反動   や      海外    景気    動向    に対する        先行き  懸念    等      から   弱い    動き    も      見      られ    まし    た      が      、      企業   収益    の      改善    等      により  全体  ...
 ```
 
 Please refer the usage by `--`.
@@ -100,18 +103,4 @@ chakki_esg_financial_{year}_extracted.zip
 └──{year}
      ├── documents.csv
      └── docs/
-```
-
-## Utilize Data for NLP
-
-We offer the parser for the financial documents based on [GiNZA](https://github.com/megagonlabs/ginza). Please refer the [ficser](https://github.com/chakki-works/ficser) to use this feature.
-
-Example: Parse
-
-```py
-```
-
-Example: NER
-
-```py
 ```
