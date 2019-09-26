@@ -8,7 +8,8 @@ with open("README.md", encoding="utf-8") as f:
 
 setup(
     name="chafic",
-    version="0.1.1",
+    use_scm_version=True,
+    setup_requires=["setuptools_scm"],
     packages=find_packages(exclude=["texts"]),
     description="chakki Financial Report Corpus",
     long_description=readme,
@@ -20,6 +21,7 @@ setup(
     install_requires=[
         "edinet-python>=0.1.14",
         "fire>=0.2.1",
+        "pandas>=0.25.1"
         "tqdm>=4.36.1"
     ],
     entry_points={"console_scripts": "chafic = chafic.cli:main"}
