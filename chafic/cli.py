@@ -79,6 +79,7 @@ class Chafic(object):
 
         """
         return self._storage.tokenize(
+            tokenizer,
             source_directory, target_directory,
             year, edinet_code, sec_code, jcn, aspect_element,
             mode, dictionary, dictionary_type)

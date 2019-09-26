@@ -14,8 +14,18 @@ You can download dataset by command line tool.
 pip install chafic
 ```
 
-```
+```bash
+# Download raw file version dataset of 2014.
 chafic download --kind F --year 2014
+
+# Extract business.overview_of_result part of TIS.Inc (sec code=3626).
+chafic parse business.overview_of_result --sec_code 3626
+
+# Tokenize text by Janome (Janome or Sudachi is supported).
+pip install janome
+chafic parse business.overview_of_result --sec_code 3626
+
+
 
 ```
 
