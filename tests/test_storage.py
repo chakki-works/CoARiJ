@@ -42,7 +42,7 @@ class TestStorage(unittest.TestCase):
 
         path = storage.parse("business.risks", sec_code="1376")
         with path.joinpath("2018/documents.csv").open(encoding="utf-8") as f:
-            self.assertGreater(len(f.readlines()), 1)
+            self.assertEquals(len(f.readlines()), 2)
         self.assertEquals(
             len(list(path.joinpath("2018/docs").glob("*business_risks.txt"))), 1)
 
@@ -61,7 +61,7 @@ class TestStorage(unittest.TestCase):
         path = storage.parse("business.risks", sec_code="1376")
         path = storage.tokenize(tokenizer="sudachi")
         with path.joinpath("2018/documents.csv").open(encoding="utf-8") as f:
-            self.assertGreater(len(f.readlines()), 1)
+            self.assertEquals(len(f.readlines()), 2)
         self.assertEquals(
             len(list(path.joinpath("2018/docs").glob(
                 "*business_risks_tokenized.txt"))), 1)

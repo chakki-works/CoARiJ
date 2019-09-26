@@ -120,9 +120,9 @@ class Storage():
 
             t_y_dir = t_dir.joinpath(y)
             t_y_dir.mkdir(parents=True, exist_ok=True)
-            with t_y_dir.joinpath("documents.csv").open(
-                    mode="w", encoding="utf-8") as f:
-                documents.to_csv(f, header=True, index=False, sep="\t")
+            documents.to_csv(t_y_dir.joinpath("documents.csv"),
+                             header=True, index=False, sep="\t",
+                             encoding="utf-8")
 
             t_y_dir = t_y_dir.joinpath("docs")
             t_y_dir.mkdir(exist_ok=True)
@@ -231,9 +231,9 @@ class Storage():
 
             t_y_dir = t_dir.joinpath(y)
             t_y_dir.mkdir(parents=True, exist_ok=True)
-            with t_y_dir.joinpath("documents.csv").open(
-                    mode="w", encoding="utf-8") as f:
-                documents.to_csv(f, header=True, index=False, sep="\t")
+            documents.to_csv(t_y_dir.joinpath("documents.csv"),
+                             header=True, index=False, sep="\t",
+                             encoding="utf-8")
 
             t_y_dir = t_y_dir.joinpath("docs")
             t_y_dir.mkdir(exist_ok=True)
