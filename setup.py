@@ -21,7 +21,7 @@ setup(
     install_requires=[
         "edinet-python>=0.1.14",
         "fire>=0.2.1",
-        "pandas>=0.25.1"
+        "pandas>=0.25.1",
         "tqdm>=4.36.1"
     ],
     entry_points={"console_scripts": "chafic = chafic.cli:main"}
