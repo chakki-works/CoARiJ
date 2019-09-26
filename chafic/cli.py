@@ -47,7 +47,7 @@ class Chafic(object):
             str: Path to parsed files directory
 
         """
-        return self._storage.download(
+        return self._storage.parse(
             aspect_element, source_directory, target_directory,
             year, normalized)
 
@@ -76,7 +76,7 @@ class Chafic(object):
             str: Path to parsed files directory
 
         """
-        return self._storage.download(
+        return self._storage.tokenize(
             source_directory, target_directory,
             year="", edinet_code="", sec_code="", jcn="",
             aspect_element="",
