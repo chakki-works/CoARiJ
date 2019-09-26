@@ -108,7 +108,6 @@ class Storage():
             }
         for y in years:
             s_y_dir = s_dir.joinpath(y)
-            print(s_y_dir.joinpath("documents.csv"))
             documents = pd.read_csv(s_y_dir.joinpath("documents.csv"),
                                     sep="\t",  header=0)
             documents["sec_code"] = documents["sec_code"].astype(str)
@@ -126,7 +125,10 @@ class Storage():
 
             t_y_dir = t_y_dir.joinpath("docs")
             t_y_dir.mkdir(exist_ok=True)
-            for i, doc_id in documents["doc_id"].iteritems():
+            print(f"Fiscal year {y}")
+            total = len(documents)
+            for i, doc_id in tqdm(iterable=documents["doc_id"].iteritems(),
+                                  total=total):
                 f = s_y_dir.joinpath(f"docs/{doc_id}.xbrl")
                 try:
                     text = edinet.parse(f.absolute(), aspect, element)
@@ -233,7 +235,9 @@ class Storage():
 
             t_y_dir = t_y_dir.joinpath("docs")
             t_y_dir.mkdir(exist_ok=True)
-            for i, doc_id in documents["doc_id"].iteritems():
+            total = len(documents)
+            for i, doc_id in tqdm(iterable=documents["doc_id"].iteritems(),
+                                  total=total):
                 for f in s_y_dir.joinpath("docs").glob(f"{doc_id}{suffix}.txt"):
                     tokens = []
                     with f.open(encoding="utf-8") as fobj:
