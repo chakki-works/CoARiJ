@@ -1,0 +1,14 @@
+language: python
+dist: "xenial"
+python:
+  - "3.6"
+  - "3.7"
+before_install:
+  - python --version
+install:
+  - pip install -r requirements-test.txt
+  - pip install pytest codecov pytest-cov
+script:
+  - pytest --cov=chafic tests/
+after_success:
+  - codecov

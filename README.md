@@ -4,6 +4,18 @@ We organized Japanese financial reports to encourage applying NLP techniques to 
 
 ## Dataset
 
+You can download dataset by command line tool.
+
+```
+pip install chafic
+```
+
+```
+
+```
+
+### Raw dataset file
+
 The corpora are separated to each financial years.
 
 | fiscal_year | Raw file version | Text extracted version | 
@@ -14,16 +26,6 @@ The corpora are separated to each financial years.
 | 2017        | [.zip](https://s3-ap-northeast-1.amazonaws.com/chakki.esg.financial.jp/dataset/release/chakki_esg_financial_2017.zip)          | [.zip](https://s3-ap-northeast-1.amazonaws.com/chakki.esg.financial.jp/dataset/release/chakki_esg_financial_extracted_2017.zip)        | 
 | 2018        | [.zip](https://s3-ap-northeast-1.amazonaws.com/chakki.esg.financial.jp/dataset/release/chakki_esg_financial_2018.zip)          | [.zip](https://s3-ap-northeast-1.amazonaws.com/chakki.esg.financial.jp/dataset/release/chakki_esg_financial_extracted_2018.zip)        | 
 
-## Download
-
-You can download data by command line tool.
-
-```
-pip install chafic
-```
-
-```
-```
 
 ## Statistics
 
@@ -66,8 +68,6 @@ chakki_esg_financial_{year}.zip
 **Text extracted version**
 
 Text extracted version includes `txt` files that match each part of an annual report.  
-`txt` files are grouped by each company (`edinet_code`).
-
 The extracted parts are defined at [`edinet-python`](https://github.com/chakki-works/edinet-python#2-extract-contents-from-xbrl).
 
 ```
@@ -75,11 +75,6 @@ chakki_esg_financial_{year}_extracted.zip
 └──{year}
      ├── documents.csv
      └── docs/
-       ├── E00004/
-       ├── E00006/
-       ├── E00008/
-       ...
-
 ```
 
 ## Utilize Data for NLP
