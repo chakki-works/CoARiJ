@@ -49,12 +49,14 @@ class Chafic(object):
         """
         return self._storage.parse(
             aspect_element, source_directory, target_directory,
-            year, normalized)
+            year, edinet_code, sec_code, jcn,
+            normalized)
 
     def tokenize(self, tokenizer="janome",
                  source_directory="", target_directory="",
                  year="", edinet_code="", sec_code="", jcn="",
-                 dictionary=""):
+                 aspect_element="",
+                 mode="", dictionary="", dictionary_type=""):
         """
         Tokenize by {tokenizer} from files in {source_directory}{year} and
         save it in {target_directory}{year} as txt/html file.
@@ -78,9 +80,8 @@ class Chafic(object):
         """
         return self._storage.tokenize(
             source_directory, target_directory,
-            year="", edinet_code="", sec_code="", jcn="",
-            aspect_element="",
-            mode="", dictionary="", dictionary_type="")
+            year, edinet_code, sec_code, jcn, aspect_element,
+            mode, dictionary, dictionary_type)
 
 
 def main():
