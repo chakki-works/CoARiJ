@@ -101,10 +101,11 @@ class Storage():
                     years.append(d.name)
 
         aspect, element = aspect_dot_element.split(".")
+        sec_code = str(sec_code)
         filters = {
             "edinet_code": edinet_code,
             "sec_code": sec_code + "0" if len(sec_code) == 4 else sec_code,
-            "jcn": jcn
+            "jcn": str(jcn)
             }
         for y in years:
             s_y_dir = s_dir.joinpath(y)
@@ -211,10 +212,11 @@ class Storage():
                     years.append(d.name)
 
         aspect_element = aspect_dot_element.replace(".", "_")
+        sec_code = str(sec_code)
         filters = {
             "edinet_code": edinet_code,
             "sec_code": sec_code + "0" if len(sec_code) == 4 else sec_code,
-            "jcn": jcn
+            "jcn": str(jcn)
             }
         suffix = "_" + aspect_element if aspect_element else "*"
         for y in years:
