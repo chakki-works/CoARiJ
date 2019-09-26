@@ -14,6 +14,14 @@ You can download dataset by command line tool.
 pip install chafic
 ```
 
+Please refer the usage by `--` (using [fire](https://github.com/google/python-fire)).
+
+```
+chafic --
+```
+
+Example command.
+
 ```bash
 # Download raw file version dataset of 2014.
 chafic download --kind F --year 2014
@@ -32,11 +40,8 @@ head -n 5 data/processed/2014/docs/S100552V_business_overview_of_result_tokenize
 当      連結    会計    年度    における        我が国  経済    は      、     消費    税率    引上げ  に      伴う    駆け込み        需要    の      反動   や      海外    景気    動向    に対する        先行き  懸念    等      から   弱い    動き    も      見      られ    まし    た      が      、      企業   収益    の      改善    等      により  全体  ...
 ```
 
-Please refer the usage by `--`.
+* About the parsable part, please refer the [`edinet-python`](https://github.com/chakki-works/edinet-python#2-extract-contents-from-xbrl).
 
-```
-chafic --
-```
 
 ### Raw dataset file
 
@@ -44,10 +49,10 @@ The corpora are separated to each financial years.
 
 | fiscal_year | Raw file version (F) | Text extracted version (E) | 
 |-------------|-------------------|-----------------|
-| 2014        | [.zip (9.3GB)](https://s3-ap-northeast-1.amazonaws.com/chakki.esg.financial.jp/dataset/release/chakki_esg_financial_2014.zip)          | [.zip (270.8MB)](https://s3-ap-northeast-1.amazonaws.com/chakki.esg.financial.jp/dataset/release/chakki_esg_financial_extracted_2014.zip)              | 
+| 2014        | [.zip (9.3GB)](https://s3-ap-northeast-1.amazonaws.com/chakki.esg.financial.jp/dataset/release/chakki_esg_financial_2014.zip)          | [.zip (269.9MB)](https://s3-ap-northeast-1.amazonaws.com/chakki.esg.financial.jp/dataset/release/chakki_esg_financial_extracted_2014.zip)              | 
 | 2015        | [.zip (9.8GB)](https://s3-ap-northeast-1.amazonaws.com/chakki.esg.financial.jp/dataset/release/chakki_esg_financial_2015.zip)          | [.zip (291.1MB)](https://s3-ap-northeast-1.amazonaws.com/chakki.esg.financial.jp/dataset/release/chakki_esg_financial_extracted_2015.zip)        | 
 | 2016        | [.zip (10.2GB)](https://s3-ap-northeast-1.amazonaws.com/chakki.esg.financial.jp/dataset/release/chakki_esg_financial_2016.zip)          | [.zip (334.7MB)](https://s3-ap-northeast-1.amazonaws.com/chakki.esg.financial.jp/dataset/release/chakki_esg_financial_extracted_2016.zip)              | 
-| 2017        | [.zip (9.1GB)](https://s3-ap-northeast-1.amazonaws.com/chakki.esg.financial.jp/dataset/release/chakki_esg_financial_2017.zip)          | [.zip (310.2MB)](https://s3-ap-northeast-1.amazonaws.com/chakki.esg.financial.jp/dataset/release/chakki_esg_financial_extracted_2017.zip)        | 
+| 2017        | [.zip (9.1GB)](https://s3-ap-northeast-1.amazonaws.com/chakki.esg.financial.jp/dataset/release/chakki_esg_financial_2017.zip)          | [.zip (309.4MB)](https://s3-ap-northeast-1.amazonaws.com/chakki.esg.financial.jp/dataset/release/chakki_esg_financial_extracted_2017.zip)        | 
 | 2018        | [.zip (10.5GB)](https://s3-ap-northeast-1.amazonaws.com/chakki.esg.financial.jp/dataset/release/chakki_esg_financial_2018.zip)          | [.zip (260.9MB)](https://s3-ap-northeast-1.amazonaws.com/chakki.esg.financial.jp/dataset/release/chakki_esg_financial_extracted_2018.zip)        | 
 
 
@@ -66,9 +71,9 @@ The corpora are separated to each financial years.
 * stock data is from [月間相場表（内国株式）](http://db-ec.jpx.co.jp/category/C021/STAT1002.html).
   * `close` is fiscal period end and `open` is 1 year before of it.
 
-### Content
+## Content
 
-**Raw file version**
+### Raw file version (`--kind F`)
 
 The structure of dataset is following.
 
@@ -93,7 +98,7 @@ chakki_esg_financial_{year}.zip
 * doc_path: `docs/S000000X.xbrl`
 * csr_path: `docs/E0000X_201X_JP_36.pdf`
 
-**Text extracted version**
+### Text extracted version (`--kind E`)
 
 Text extracted version includes `txt` files that match each part of an annual report.  
 The extracted parts are defined at [`edinet-python`](https://github.com/chakki-works/edinet-python#2-extract-contents-from-xbrl).

@@ -126,8 +126,8 @@ class Storage():
 
             t_y_dir = t_y_dir.joinpath("docs")
             t_y_dir.mkdir(exist_ok=True)
-            print(f"Fiscal year {y}")
             total = len(documents)
+            print(f"Fiscal year {y}")
             for i, doc_id in tqdm(iterable=documents["doc_id"].iteritems(),
                                   total=total):
                 f = s_y_dir.joinpath(f"docs/{doc_id}.xbrl")
@@ -238,6 +238,7 @@ class Storage():
             t_y_dir = t_y_dir.joinpath("docs")
             t_y_dir.mkdir(exist_ok=True)
             total = len(documents)
+            print(f"Fiscal year {y}")
             for i, doc_id in tqdm(iterable=documents["doc_id"].iteritems(),
                                   total=total):
                 for f in s_y_dir.joinpath("docs").glob(f"{doc_id}{suffix}.txt"):
