@@ -1,4 +1,4 @@
-# chaFiC: chakki Financial Report Corpus
+# CoARiJ: Corpus of Annual Reports in Japan
 
 [![PyPI version](https://badge.fury.io/py/chafic.svg)](https://badge.fury.io/py/chaFiC)
 [![Build Status](https://travis-ci.org/chakki-works/chaFiC.svg?branch=master)](https://travis-ci.org/chakki-works/chaFiC)
