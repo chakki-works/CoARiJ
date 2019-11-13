@@ -9,7 +9,7 @@ class TestStorage(unittest.TestCase):
 
     @classmethod
     def tearDownClass(cls):
-        shutil.rmtree(Path.cwd().joinpath("tdata"))
+        shutil.rmtree(Path.cwd().joinpath(cls.ROOT))
 
     def test_download(self):
         path = self._download()
@@ -20,9 +20,15 @@ class TestStorage(unittest.TestCase):
         self.assertGreater(
             len(list(path.joinpath("docs").glob("*.xbrl"))), 1)
 
+    def test_download_ledger(self):
+        storage = Storage(self.ROOT)
+        ledger = storage.download_ledger(directory=f"{self.ROOT}/processed")
+        self.assertGreater(len(ledger.data), 1)
+        self.assertTrue(Path(ledger.path).exists)
+
     def test_download_extracted(self):
         storage = Storage(self.ROOT)
-        path = storage.download(directory="tdata/rawe", kind="XE", year=2018)
+        path = storage.download(directory=f"{self.ROOT}/rawe", kind="XE", year=2018)
         self.assertTrue(path.exists())
         self.assertEqual(path.name, "2018")
         self.assertTrue(path.joinpath("documents.csv").exists())

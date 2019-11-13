@@ -29,7 +29,7 @@ coarij download --kind F --year 2014
 # Extract business.overview_of_result part of TIS.Inc (sec code=3626).
 coarij parse business.overview_of_result --sec_code 3626
 
-# Tokenize text by Janome (Janome or Sudachi is supported).
+# Tokenize text by Janome (`janome` or `sudachi` is supported).
 pip install janome
 coarij tokenize --tokenizer janome
 
@@ -41,6 +41,17 @@ head -n 5 data/processed/2014/docs/S100552V_business_overview_of_result_tokenize
 ```
 
 * About the parsable part, please refer the [`edinet-python`](https://github.com/chakki-works/edinet-python#2-extract-contents-from-xbrl).
+
+You can use `Ledger` to select your necessary file from overall CoARiJ dataset.
+
+```python
+from coarij.storage import Storage
+
+
+storage = Storage("your/data/directory")
+ledger = storage.download_ledger()
+collected = ledger.collect(edinet_code="E00021")
+```
 
 
 ### Raw dataset file

@@ -5,6 +5,7 @@ import requests
 import pandas as pd
 from tqdm import tqdm
 import edinet
+from coarij.ledger import Ledger
 
 
 class Storage():
@@ -14,6 +15,39 @@ class Storage():
         self._default_raw_data = f"{_root}/raw"
         self._default_interim_data = f"{_root}/interim"
         self._default_processed_data = f"{_root}/processed"
+
+    def download_ledger(self, directory="", force=False):
+        url = "https://s3-ap-northeast-1.amazonaws.com/chakki.esg.financial.jp/dataset/release/coarij.csv"  # noqa
+
+        dirname = directory if directory else self._default_processed_data
+        _directory = Path(dirname)
+        if not _directory.is_absolute():
+            _directory = Path.cwd().joinpath(dirname)
+
+        if not _directory.exists():
+            _directory.mkdir(parents=True, exist_ok=True)
+        file_name = url.split("/")[-1]
+        path = _directory.joinpath(file_name)
+
+        if path.exists():
+            return Ledger(self, path)
+
+        resp = requests.get(url, stream=True)
+        if not resp.ok:
+            raise Exception("Can not get list from server.")
+
+        total_size = int(resp.headers.get("content-length", 0))
+        print(f"Download coarij list.")
+        with path.open(mode="wb") as f:
+            chunk_size = 1024
+            limit = total_size / chunk_size
+            for data in tqdm(resp.iter_content(chunk_size=chunk_size),
+                             total=limit, unit="B", unit_scale=True):
+                f.write(data)
+
+        ledger = Ledger(self, path)
+
+        return ledger
 
     def download(self, directory="", kind="F", year="", force=False):
         DOWNLAD_URL = "https://s3-ap-northeast-1.amazonaws.com/chakki.esg.financial.jp/dataset/release/chakki_esg_financial{}_{}.zip"  # noqa
@@ -52,7 +86,7 @@ class Storage():
 
         resp = requests.get(url, stream=True)
         if not resp.ok:
-            raise Exception("Can not get dataset from {}.".format(url))
+            raise Exception("Can not get dataset from server.")
 
         total_size = int(resp.headers.get("content-length", 0))
         print(f"Download {file_name}")
