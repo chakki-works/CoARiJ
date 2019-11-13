@@ -1,7 +1,7 @@
 import unittest
 import shutil
 from pathlib import Path
-from chafic.storage import Storage
+from coarij.storage import Storage
 
 
 class TestStorage(unittest.TestCase):

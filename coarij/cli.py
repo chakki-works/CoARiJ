@@ -1,10 +1,11 @@
 import fire
-from chafic.storage import Storage
+from coarij.storage import Storage
 
 
-class Chafic(object):
+class CoARiJ(object):
     """
-    Data management tool for chaFiC dataset.
+    Data management tool for CoARiJ
+     dataset.
     """
 
     def __init__(self):
@@ -86,7 +87,7 @@ class Chafic(object):
 
 
 def main():
-    fire.Fire(Chafic)
+    fire.Fire(CoARiJ)
 
 
 if __name__ == "__main__":

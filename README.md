@@ -1,8 +1,8 @@
 # CoARiJ: Corpus of Annual Reports in Japan
 
-[![PyPI version](https://badge.fury.io/py/chafic.svg)](https://badge.fury.io/py/chaFiC)
-[![Build Status](https://travis-ci.org/chakki-works/chaFiC.svg?branch=master)](https://travis-ci.org/chakki-works/chaFiC)
-[![codecov](https://codecov.io/gh/chakki-works/chaFiC/branch/master/graph/badge.svg)](https://codecov.io/gh/chakki-works/chaFiC)
+[![PyPI version](https://badge.fury.io/py/coarij.svg)](https://badge.fury.io/py/coarij)
+[![Build Status](https://travis-ci.org/chakki-works/coarij.svg?branch=master)](https://travis-ci.org/chakki-works/coarij)
+[![codecov](https://codecov.io/gh/chakki-works/coarij/branch/master/graph/badge.svg)](https://codecov.io/gh/chakki-works/coarij)
 
 We organized Japanese financial reports to encourage applying NLP techniques to financial analytics.
 
@@ -11,27 +11,27 @@ We organized Japanese financial reports to encourage applying NLP techniques to 
 You can download dataset by command line tool.
 
 ```
-pip install chafic
+pip install coarij
 ```
 
 Please refer the usage by `--` (using [fire](https://github.com/google/python-fire)).
 
 ```
-chafic --
+coarij --
 ```
 
 Example command.
 
 ```bash
 # Download raw file version dataset of 2014.
-chafic download --kind F --year 2014
+coarij download --kind F --year 2014
 
 # Extract business.overview_of_result part of TIS.Inc (sec code=3626).
-chafic parse business.overview_of_result --sec_code 3626
+coarij parse business.overview_of_result --sec_code 3626
 
 # Tokenize text by Janome (Janome or Sudachi is supported).
 pip install janome
-chafic tokenize --tokenizer janome
+coarij tokenize --tokenizer janome
 
 # Show tokenized result (words are separated by \t).
 head -n 5 data/processed/2014/docs/S100552V_business_overview_of_result_tokenized.txt

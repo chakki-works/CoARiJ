@@ -9,7 +9,7 @@ install:
   - pip install -r requirements-test.txt
   - pip install pytest codecov pytest-cov setuptools-scm
 script:
-  - pytest --cov=chafic tests/
+  - pytest --cov=coarij tests/
 after_success:
   - codecov
 deploy:
