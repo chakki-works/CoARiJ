@@ -16,8 +16,10 @@ class Storage():
         self._default_interim_data = f"{_root}/interim"
         self._default_processed_data = f"{_root}/processed"
 
-    def download_ledger(self, directory="", force=False):
+    def download_ledger(self, directory="", force=False, latest=False):
         url = "https://s3-ap-northeast-1.amazonaws.com/chakki.esg.financial.jp/dataset/release/coarij.csv"  # noqa
+        if latest:
+            url = "https://s3-ap-northeast-1.amazonaws.com/chakki.esg.financial.jp/dataset/release/coarij_latest.csv"  # noqa
 
         dirname = directory if directory else self._default_processed_data
         _directory = Path(dirname)

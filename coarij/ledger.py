@@ -12,6 +12,7 @@ class Ledger():
         self.storage = storage
         self.path = path
         self.data = pd.read_csv(self.path, sep="\t")
+        print(self.data.columns)
         self.data = self.data.astype({
             "fiscal_year": str,
             "sec_code": str,
