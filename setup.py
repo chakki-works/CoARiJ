@@ -19,7 +19,7 @@ setup(
     license="MIT",
     url="https://github.com/chakki-works/CoARiJ",
     install_requires=[
-        "edinet-python>=0.1.14",
+        "xbrr>=0.2.0",
         "fire>=0.2.1",
         "pandas>=0.25.1",
         "tqdm>=4.36.1"
