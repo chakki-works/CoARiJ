@@ -27,7 +27,7 @@ Example command.
 coarij download --kind F --year 2014
 
 # Extract business.overview_of_result part of TIS.Inc (sec code=3626).
-coarij parse business.overview_of_result --sec_code 3626
+coarij extract business.overview_of_result --sec_code 3626
 
 # Tokenize text by Janome (`janome` or `sudachi` is supported).
 pip install janome
@@ -40,7 +40,7 @@ head -n 5 data/processed/2014/docs/S100552V_business_overview_of_result_tokenize
 当      連結    会計    年度    における        我が国  経済    は      、     消費    税率    引上げ  に      伴う    駆け込み        需要    の      反動   や      海外    景気    動向    に対する        先行き  懸念    等      から   弱い    動き    も      見      られ    まし    た      が      、      企業   収益    の      改善    等      により  全体  ...
 ```
 
-* About the parsable part, please refer the [`edinet-python`](https://github.com/chakki-works/edinet-python#2-extract-contents-from-xbrl).
+* About the parsable part, please refer the [`xbrr`](https://github.com/chakki-works/xbrr/blob/master/docs/edinet.md).
 
 You can use `Ledger` to select your necessary file from overall CoARiJ dataset.
 
@@ -49,7 +49,7 @@ from coarij.storage import Storage
 
 
 storage = Storage("your/data/directory")
-ledger = storage.download_ledger()
+ledger = storage.get_ledger()
 collected = ledger.collect(edinet_code="E00021")
 ```
 
@@ -97,7 +97,7 @@ chakki_esg_financial_{year}.zip
 
 `docs` includes XBRL and PDF file.
 
-* XBRL file of annual reports (files are retrieved from [EDINET]).
+* XBRL file of annual reports (files are retrieved from [EDINET](http://disclosure.edinet-fsa.go.jp/)).
 * PDF file of CSR reports (additional content).
 
 `documents.csv` has metadata like following.
@@ -112,7 +112,7 @@ chakki_esg_financial_{year}.zip
 ### Text extracted version (`--kind E`)
 
 Text extracted version includes `txt` files that match each part of an annual report.  
-The extracted parts are defined at [`edinet-python`](https://github.com/chakki-works/edinet-python#2-extract-contents-from-xbrl).
+The extracted parts are defined at [`xbrr`](https://github.com/chakki-works/xbrr/blob/master/docs/edinet.md).
 
 ```
 chakki_esg_financial_{year}_extracted.zip

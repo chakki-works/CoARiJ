@@ -85,7 +85,7 @@ class CoARiJ(object):
             tokenizer=tokenizer,
             mode=mode, dictionary=dictionary, dictionary_type=dictionary_type,
             year=year, edinet_code=edinet_code, sec_code=sec_code, jcn=jcn,
-            aspect_element=aspect_element,
+            aspect_dot_element=aspect_element,
             source_directory=source_directory, target_directory=target_directory)
 
 
