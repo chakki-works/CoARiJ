@@ -26,64 +26,67 @@ class CoARiJ(object):
         """
         return self._storage.download(directory, kind, year, force)
 
-    def parse(self, aspect_element,
-              source_directory="", target_directory="",
-              year="", edinet_code="", sec_code="", jcn="",
-              normalized=True):
+    def extract(self, aspect_element,
+                year="", edinet_code="", sec_code="", jcn="",
+                source_directory="", target_directory="",                
+                normalized=True):
         """
-        Parse {aspect_to_element} from files in {source_directory}{year} and
+        Extract {aspect_to_element} from files in {source_directory}{year} and
         save it in {target_directory}{year} as txt/html file.
 
         Args:
             aspect_element (str): Target aspect.element (ex: company.history).
-            source_directory (str): Source directory includes XBRL files.
-            target_directory (str): Target directory that txt/htmls are saved.
             year (str): Target financial year.
             edinet_code (str): EDINET code to specify compan.
             sec_code (str): SEC code to specify compan.
             jcn (str): Target JCN code to specify compan.
+            source_directory (str): Source directory includes XBRL files.
+            target_directory (str): Target directory that txt/htmls are saved.
             normalized: (bool): True: extract text, False: save raw xml(html).
 
         Returns:
-            str: Path to parsed files directory
+            str: Path to extracted files directory
 
         """
-        return self._storage.parse(
-            aspect_element, source_directory, target_directory,
-            year, edinet_code, sec_code, jcn,
-            normalized)
+
+        return self._storage.extract(
+            aspect_dot_element=aspect_element, 
+            year=year, edinet_code=edinet_code, sec_code=sec_code, jcn=jcn,
+            source_directory=source_directory, target_directory=target_directory,
+            normalized=normalized)
 
     def tokenize(self, tokenizer="janome",
-                 source_directory="", target_directory="",
+                 mode="", dictionary="", dictionary_type="",
                  year="", edinet_code="", sec_code="", jcn="",
                  aspect_element="",
-                 mode="", dictionary="", dictionary_type=""):
+                 source_directory="", target_directory=""):
         """
         Tokenize by {tokenizer} from files in {source_directory}{year} and
         save it in {target_directory}{year} as txt/html file.
 
         Args:
             tokenizer (str): Japanese tokenizer ('janome' or 'sudachi').
-            source_directory (str): Source directory includes XBRL files.
-            target_directory (str): Target directory that txt/htmls are saved.
+            mode: (str): Sudachi tokenizer mode.
+            dictionary: (str): Dictionary path for Janome.
+            dictionary_type: (str): Dictionary type for Janome.
             year (str): Target financial year.
             edinet_code (str): EDINET code to specify compan.
             sec_code (str): SEC code to specify compan.
             jcn (str): Target JCN code to specify compan.
             aspect_element (str): Target aspect.element (ex: company.history).
-            mode: (str): Sudachi tokenizer mode.
-            dictionary: (str): Dictionary path for Janome.
-            dictionary_type: (str): Dictionary type for Janome.
+            source_directory (str): Source directory includes XBRL files.
+            target_directory (str): Target directory that txt/htmls are saved.
 
         Returns:
-            str: Path to parsed files directory
+            str: Path to tokenized files directory
 
         """
         return self._storage.tokenize(
-            tokenizer,
-            source_directory, target_directory,
-            year, edinet_code, sec_code, jcn, aspect_element,
-            mode, dictionary, dictionary_type)
+            tokenizer=tokenizer,
+            mode=mode, dictionary=dictionary, dictionary_type=dictionary_type,
+            year=year, edinet_code=edinet_code, sec_code=sec_code, jcn=jcn,
+            aspect_element=aspect_element,
+            source_directory=source_directory, target_directory=target_directory)
 
 
 def main():
