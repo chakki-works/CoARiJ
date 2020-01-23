@@ -22,7 +22,7 @@ class TestStorage(unittest.TestCase):
 
     def test_download_ledger(self):
         storage = Storage(self.ROOT)
-        ledger = storage.download_ledger(directory=f"{self.ROOT}/processed")
+        ledger = storage.get_ledger(directory=f"{self.ROOT}/processed")
         self.assertGreater(len(ledger.data), 1)
         self.assertTrue(Path(ledger.path).exists)
 
@@ -39,14 +39,14 @@ class TestStorage(unittest.TestCase):
     def test_parse(self):
         storage = Storage(self.ROOT)
         path = self._download(kind="F")
-        path = storage.parse("company.history")
+        path = storage.extract("company.history")
         self.assertTrue(path.exists())
         self.assertTrue(path.joinpath("2018").exists())
         self.assertTrue(path.joinpath("2018/documents.csv").exists())
         self.assertGreater(
             len(list(path.joinpath("2018/docs").glob("*company_history.txt"))), 0)
 
-        path = storage.parse("business.risks", sec_code="1376")
+        path = storage.extract("business.risks", sec_code="1376")
         with path.joinpath("2018/documents.csv").open(encoding="utf-8") as f:
             self.assertEquals(len(f.readlines()), 2)
         self.assertEquals(
@@ -55,7 +55,7 @@ class TestStorage(unittest.TestCase):
     def test_tokenize(self):
         storage = Storage(self.ROOT)
         path = self._download(kind="F")
-        path = storage.parse("company.history")
+        path = storage.extract("company.history")
         path = storage.tokenize(tokenizer="janome")
         self.assertTrue(path.exists())
         self.assertTrue(path.joinpath("2018").exists())
@@ -64,7 +64,7 @@ class TestStorage(unittest.TestCase):
             len(list(path.joinpath("2018/docs").glob(
                 "*company_history_tokenized.txt"))), 0)
 
-        path = storage.parse("business.risks", sec_code="1376")
+        path = storage.extract("business.risks", sec_code="1376")
         path = storage.tokenize(tokenizer="sudachi")
         with path.joinpath("2018/documents.csv").open(encoding="utf-8") as f:
             self.assertEquals(len(f.readlines()), 2)

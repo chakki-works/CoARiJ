@@ -1,9 +1,10 @@
+import os
 from pathlib import Path
 import shutil
 import time
 import pandas as pd
 from tqdm import tqdm
-from edinet.client.document_client import DocumentClient
+from xbrr.edinet.client.document_client import DocumentClient
 
 
 class Ledger():
@@ -12,7 +13,6 @@ class Ledger():
         self.storage = storage
         self.path = path
         self.data = pd.read_csv(self.path, sep="\t")
-        print(self.data.columns)
         self.data = self.data.astype({
             "fiscal_year": str,
             "sec_code": str,
@@ -22,6 +22,9 @@ class Ledger():
     def collect(self, directory="", source_directory="",
                 year="", edinet_code="", sec_code="", jcn="",
                 file_type="xbrl"):
+        """
+        Collect the documents based on ledger file.
+        """
 
         if not source_directory:
             s_dir = Path.cwd().joinpath(self.storage._default_raw_data)
@@ -77,10 +80,14 @@ class Ledger():
                 elif file_type == "zip":
                     file_path = client.get_xbrl(doc_id, save_dir=t_dir,
                             expand_level="dir")
+                elif file_type == "csr":
+                    if isinstance(r['csr_path'], str) and r['csr_path']:
+                        print(r['csr_path'])
+                        file_name = os.path.basename(r['csr_path'])
+                        url = f"https://s3-ap-northeast-1.amazonaws.com/chakki.esg.csr.jp/{r['csr_path']}"
+                        self.storage._download(url, t_dir.joinpath(file_name))
                 else:
                     raise Exception(f"File type {file_type} is not supported")
                 time.sleep(0.1)  # to save api host
-
-        print(target)
 
         return target
