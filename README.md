@@ -58,11 +58,6 @@ collected = ledger.collect(edinet_code="E00021")
 
 The corpora are separated to each financial years.
 
-* financial data is from [決算短信情報](http://db-ec.jpx.co.jp/category/C027/).
-  * We use non-cosolidated data if it exist.
-* stock data is from [月間相場表（内国株式）](http://db-ec.jpx.co.jp/category/C021/STAT1002.html).
-  * `close` is fiscal period end and `open` is 1 year before of it.
-
 | fiscal_year | Raw file version (F) | Text extracted version (E) | 
 |-------------|-------------------|-----------------|
 | 2014        | [.zip (9.3GB)](https://s3-ap-northeast-1.amazonaws.com/chakki.esg.financial.jp/dataset/release/chakki_esg_financial_2014.zip)          | [.zip (269.9MB)](https://s3-ap-northeast-1.amazonaws.com/chakki.esg.financial.jp/dataset/release/chakki_esg_financial_extracted_2014.zip)              | 
@@ -70,6 +65,11 @@ The corpora are separated to each financial years.
 | 2016        | [.zip (10.2GB)](https://s3-ap-northeast-1.amazonaws.com/chakki.esg.financial.jp/dataset/release/chakki_esg_financial_2016.zip)          | [.zip (334.7MB)](https://s3-ap-northeast-1.amazonaws.com/chakki.esg.financial.jp/dataset/release/chakki_esg_financial_extracted_2016.zip)              | 
 | 2017        | [.zip (9.1GB)](https://s3-ap-northeast-1.amazonaws.com/chakki.esg.financial.jp/dataset/release/chakki_esg_financial_2017.zip)          | [.zip (309.4MB)](https://s3-ap-northeast-1.amazonaws.com/chakki.esg.financial.jp/dataset/release/chakki_esg_financial_extracted_2017.zip)        | 
 | 2018        | [.zip (10.5GB)](https://s3-ap-northeast-1.amazonaws.com/chakki.esg.financial.jp/dataset/release/chakki_esg_financial_2018.zip)          | [.zip (260.9MB)](https://s3-ap-northeast-1.amazonaws.com/chakki.esg.financial.jp/dataset/release/chakki_esg_financial_extracted_2018.zip)        | 
+
+* financial data is from [決算短信情報](http://db-ec.jpx.co.jp/category/C027/).
+  * We use non-cosolidated data if it exist.
+* stock data is from [月間相場表（内国株式）](http://db-ec.jpx.co.jp/category/C021/STAT1002.html).
+  * `close` is fiscal period end and `open` is 1 year before of it.
 
 **History**
 
