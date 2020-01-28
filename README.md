@@ -54,9 +54,11 @@ collected = ledger.collect(edinet_code="E00021")
 ```
 
 
-### Raw dataset file
+## Dataset
 
 The corpora are separated to each financial years.
+
+**master version**
 
 | fiscal_year | Raw file version (F) | Text extracted version (E) | 
 |-------------|-------------------|-----------------|
@@ -66,8 +68,12 @@ The corpora are separated to each financial years.
 | 2017        | [.zip (9.1GB)](https://s3-ap-northeast-1.amazonaws.com/chakki.esg.financial.jp/dataset/release/chakki_esg_financial_2017.zip)          | [.zip (309.4MB)](https://s3-ap-northeast-1.amazonaws.com/chakki.esg.financial.jp/dataset/release/chakki_esg_financial_extracted_2017.zip)        | 
 | 2018        | [.zip (10.5GB)](https://s3-ap-northeast-1.amazonaws.com/chakki.esg.financial.jp/dataset/release/chakki_esg_financial_2018.zip)          | [.zip (260.9MB)](https://s3-ap-northeast-1.amazonaws.com/chakki.esg.financial.jp/dataset/release/chakki_esg_financial_extracted_2018.zip)        | 
 
+* financial data is from [決算短信情報](http://db-ec.jpx.co.jp/category/C027/).
+  * We use non-cosolidated data if it exist.
+* stock data is from [月間相場表（内国株式）](http://db-ec.jpx.co.jp/category/C021/STAT1002.html).
+  * `close` is fiscal period end and `open` is 1 year before of it.
 
-## Statistics
+**Statistics**
 
 | fiscal_year | number_of_reports | has_csr_reports | has_financial_data | has_stock_data | 
 |-------------|-------------------|-----------------|--------------------|----------------| 
@@ -77,14 +83,13 @@ The corpora are separated to each financial years.
 | 2017        | 3,578             | 89              | 3,441              | 3,472           | 
 | 2018        | 3,513             | 70              | 2,893              | 3,413           | 
 
-* financial data is from [決算短信情報](http://db-ec.jpx.co.jp/category/C027/).
-  * We use non-cosolidated data if it exist.
-* stock data is from [月間相場表（内国株式）](http://db-ec.jpx.co.jp/category/C021/STAT1002.html).
-  * `close` is fiscal period end and `open` is 1 year before of it.
+### History
 
-## Content
+* [v1.0]()
 
-### Raw file version (`--kind F`)
+### File structure
+
+#### Raw file version (`--kind F`)
 
 The structure of dataset is following.
 
@@ -109,7 +114,7 @@ chakki_esg_financial_{year}.zip
 * doc_path: `docs/S000000X.xbrl`
 * csr_path: `docs/E0000X_201X_JP_36.pdf`
 
-### Text extracted version (`--kind E`)
+#### Text extracted version (`--kind E`)
 
 Text extracted version includes `txt` files that match each part of an annual report.  
 The extracted parts are defined at [`xbrr`](https://github.com/chakki-works/xbrr/blob/master/docs/edinet.md).
