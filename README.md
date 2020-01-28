@@ -8,55 +8,9 @@ We organized Japanese financial reports to encourage applying NLP techniques to 
 
 ## Dataset
 
-You can download dataset by command line tool.
-
-```
-pip install coarij
-```
-
-Please refer the usage by `--` (using [fire](https://github.com/google/python-fire)).
-
-```
-coarij --
-```
-
-Example command.
-
-```bash
-# Download raw file version dataset of 2014.
-coarij download --kind F --year 2014
-
-# Extract business.overview_of_result part of TIS.Inc (sec code=3626).
-coarij extract business.overview_of_result --sec_code 3626
-
-# Tokenize text by Janome (`janome` or `sudachi` is supported).
-pip install janome
-coarij tokenize --tokenizer janome
-
-# Show tokenized result (words are separated by \t).
-head -n 5 data/processed/2014/docs/S100552V_business_overview_of_result_tokenized.txt
-1       【      業績    等      の      概要    】
-(       1       )               業績
-当      連結    会計    年度    における        我が国  経済    は      、     消費    税率    引上げ  に      伴う    駆け込み        需要    の      反動   や      海外    景気    動向    に対する        先行き  懸念    等      から   弱い    動き    も      見      られ    まし    た      が      、      企業   収益    の      改善    等      により  全体  ...
-```
-
-* About the parsable part, please refer the [`xbrr`](https://github.com/chakki-works/xbrr/blob/master/docs/edinet.md).
-
-You can use `Ledger` to select your necessary file from overall CoARiJ dataset.
-
-```python
-from coarij.storage import Storage
-
-
-storage = Storage("your/data/directory")
-ledger = storage.get_ledger()
-collected = ledger.collect(edinet_code="E00021")
-```
-
-
-## Dataset
-
 The corpora are separated to each financial years.
+
+master version.
 
 | fiscal_year | Raw file version (F) | Text extracted version (E) | 
 |-------------|-------------------|-----------------|
@@ -71,7 +25,7 @@ The corpora are separated to each financial years.
 * stock data is from [月間相場表（内国株式）](http://db-ec.jpx.co.jp/category/C021/STAT1002.html).
   * `close` is fiscal period end and `open` is 1 year before of it.
 
-**History**
+### Past release
 
 * [v1.0](https://github.com/chakki-works/CoARiJ/blob/master/releases/v1.0.md)
 
@@ -122,4 +76,51 @@ chakki_esg_financial_{year}_extracted.zip
 └──{year}
      ├── documents.csv
      └── docs/
+```
+
+## Tool
+
+You can download dataset by command line tool.
+
+```
+pip install coarij
+```
+
+Please refer the usage by `--` (using [fire](https://github.com/google/python-fire)).
+
+```
+coarij --
+```
+
+Example command.
+
+```bash
+# Download raw file version dataset of 2014.
+coarij download --kind F --year 2014
+
+# Extract business.overview_of_result part of TIS.Inc (sec code=3626).
+coarij extract business.overview_of_result --sec_code 3626
+
+# Tokenize text by Janome (`janome` or `sudachi` is supported).
+pip install janome
+coarij tokenize --tokenizer janome
+
+# Show tokenized result (words are separated by \t).
+head -n 5 data/processed/2014/docs/S100552V_business_overview_of_result_tokenized.txt
+1       【      業績    等      の      概要    】
+(       1       )               業績
+当      連結    会計    年度    における        我が国  経済    は      、     消費    税率    引上げ  に      伴う    駆け込み        需要    の      反動   や      海外    景気    動向    に対する        先行き  懸念    等      から   弱い    動き    も      見      られ    まし    た      が      、      企業   収益    の      改善    等      により  全体  ...
+```
+
+* About the parsable part, please refer the [`xbrr`](https://github.com/chakki-works/xbrr/blob/master/docs/edinet.md).
+
+You can use `Ledger` to select your necessary file from overall CoARiJ dataset.
+
+```python
+from coarij.storage import Storage
+
+
+storage = Storage("your/data/directory")
+ledger = storage.get_ledger()
+collected = ledger.collect(edinet_code="E00021")
 ```
