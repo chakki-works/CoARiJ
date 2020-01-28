@@ -10,16 +10,25 @@ from coarij.ledger import Ledger
 
 class Storage():
 
-    def __init__(self, root=""):
+    def __init__(self, root="", version="master"):
         _root = root if root else "data"
+        self.version = version
         self._default_raw_data = f"{_root}/raw"
         self._default_interim_data = f"{_root}/interim"
         self._default_processed_data = f"{_root}/processed"
 
+    def make_url(self, item, latest=False):
+        url = "https://s3-ap-northeast-1.amazonaws.com/chakki.esg.financial.jp/dataset/release/"
+
+        if not latest and self.version and self.version != "master":
+            return f"{url}{self.version}/{item}"
+        else:
+            return f"{url}{item}"
+
     def get_ledger(self, directory="", force=False, latest=False):
-        url = "https://s3-ap-northeast-1.amazonaws.com/chakki.esg.financial.jp/dataset/release/coarij.csv"  # noqa
+        url = self.make_url("coarij.csv")
         if latest:
-            url = "https://s3-ap-northeast-1.amazonaws.com/chakki.esg.financial.jp/dataset/release/coarij_latest.csv"  # noqa
+            url = self.make_url("coarij_latest.csv", latest)
 
         dirname = directory if directory else self._default_processed_data
         _directory = Path(dirname)
@@ -52,7 +61,7 @@ class Storage():
         return ledger
 
     def download(self, directory="", kind="F", year="", force=False):
-        DOWNLAD_URL = "https://s3-ap-northeast-1.amazonaws.com/chakki.esg.financial.jp/dataset/release/chakki_esg_financial{}_{}.zip"  # noqa
+        DOWNLAD_URL = self.make_url("chakki_esg_financial{}_{}.zip")
 
         _kind = kind if len(kind) == 1 else kind[-1]
         default = self._default_interim_data if _kind == "E"\

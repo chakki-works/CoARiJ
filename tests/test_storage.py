@@ -20,6 +20,15 @@ class TestStorage(unittest.TestCase):
         self.assertGreater(
             len(list(path.joinpath("docs").glob("*.xbrl"))), 1)
 
+    def test_download_v1(self):
+        path = self._download(version="v1.0")
+        self.assertTrue(path.exists())
+        self.assertEqual(path.name, "2018")
+        self.assertTrue(path.joinpath("documents.csv").exists())
+        self.assertTrue(path.joinpath("docs").exists())
+        self.assertGreater(
+            len(list(path.joinpath("docs").glob("*.xbrl"))), 1)
+
     def test_download_ledger(self):
         storage = Storage(self.ROOT)
         ledger = storage.get_ledger(directory=f"{self.ROOT}/processed")
@@ -72,7 +81,7 @@ class TestStorage(unittest.TestCase):
             len(list(path.joinpath("2018/docs").glob(
                 "*business_risks_tokenized.txt"))), 1)
 
-    def _download(self, kind="F"):
-        storage = Storage(self.ROOT)
+    def _download(self, kind="F", version=""):
+        storage = Storage(self.ROOT, version)
         path = storage.download(kind="X" + kind, year=2018)
         return path
