@@ -100,7 +100,7 @@ chakki_esg_financial_{year}.zip
 * XBRL file of annual reports (files are retrieved from [EDINET](http://disclosure.edinet-fsa.go.jp/)).
 * PDF file of CSR reports (additional content).
 
-`documents.csv` has metadata like following.
+`documents.csv` has metadata like following. Please refer the detail at [Wiki](https://github.com/chakki-works/CoARiJ/wiki/Columns-on-the-file).
 
 * edinet_code: `E0000X`
 * filer_name: `XXX株式会社`
