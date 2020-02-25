@@ -8,8 +8,8 @@ class CoARiJ(object):
      dataset.
     """
 
-    def __init__(self):
-        self._storage = Storage()
+    def __init__(self, version="v1.0"):
+        self._storage = Storage(version=version)
 
     def download(self, directory="", kind="F", year="", force=False):
         """Download the {kind} {year} dataset to {directory}.
