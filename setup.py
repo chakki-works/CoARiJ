@@ -19,10 +19,8 @@ setup(
     license="MIT",
     url="https://github.com/chakki-works/CoARiJ",
     install_requires=[
-        "xbrr>=0.2.0",
-        "fire>=0.2.1",
-        "pandas>=0.25.1",
-        "tqdm>=4.36.1"
+        "xbrr>=0.2.7",
+        "fire>=0.2.1"
     ],
     entry_points={"console_scripts": "coarij = coarij.cli:main"}
 )
