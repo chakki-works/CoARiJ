@@ -72,22 +72,30 @@ class Ledger():
                 shutil.copy(str(y_s_path), str(t_dir.joinpath(f"{doc_id}.xbrl")))
             else:
                 client = DocumentClient()
-                if file_type == "pdf":
-                    file_path = client.get_pdf(doc_id, save_dir=t_dir)
-                elif file_type == "xbrl":
-                    file_path = client.get_xbrl(doc_id, save_dir=t_dir,
-                            expand_level="file")
-                elif file_type == "zip":
-                    file_path = client.get_xbrl(doc_id, save_dir=t_dir,
-                            expand_level="dir")
-                elif file_type == "csr":
-                    if isinstance(r['csr_path'], str) and r['csr_path']:
-                        print(r['csr_path'])
-                        file_name = os.path.basename(r['csr_path'])
-                        url = f"https://s3-ap-northeast-1.amazonaws.com/chakki.esg.csr.jp/{r['csr_path']}"
-                        self.storage._download(url, t_dir.joinpath(file_name))
-                else:
+                file_type_matched = True
+                try:
+                    if file_type == "pdf":
+                        file_path = client.get_pdf(doc_id, save_dir=t_dir)
+                    elif file_type == "xbrl":
+                        file_path = client.get_xbrl(doc_id, save_dir=t_dir,
+                                expand_level="file")
+                    elif file_type == "zip":
+                        file_path = client.get_xbrl(doc_id, save_dir=t_dir,
+                                expand_level="dir")
+                    elif file_type == "csr":
+                        if isinstance(r['csr_path'], str) and r['csr_path']:
+                            print(r['csr_path'])
+                            file_name = os.path.basename(r['csr_path'])
+                            url = f"https://s3-ap-northeast-1.amazonaws.com/chakki.esg.csr.jp/{r['csr_path']}"
+                            self.storage._download(url, t_dir.joinpath(file_name))
+                    else:
+                        file_type_matched = False
+                except Exception as e:
+                    print("Can not download {}.".format(doc_id))
+                
+                if not file_type_matched:
                     raise Exception(f"File type {file_type} is not supported")
+
                 time.sleep(0.1)  # to save api host
 
         return target
